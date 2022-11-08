@@ -2,15 +2,15 @@ import { Button } from 'flowbite-react';
 import React from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import Banner from './Banner/Banner'
-import ServicesCard from './ServicesCard/ServicesCard';
+import ServicesCard from '../../shared/ServicesCard/ServicesCard';
 
 export default function Home() {
     const services = useLoaderData();
     return (
         <div className=''>
-            {/* <Banner /> */}
+            <Banner />
             <div className='mt-20 px-4 md:px-20'>
-                <div className='flex justify-center'>
+                <div className='flex justify-center' id='services'>
                     <div>
                         <h3 className='text-center font-bold text-3xl mb-1'>Services</h3>
                         <p className='text-center opacity-50'>Explore our services to see what you need.</p>

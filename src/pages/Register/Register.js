@@ -3,7 +3,7 @@ import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../contexts/authProvider/AuthProvider'
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const provider = new GoogleAuthProvider();
 

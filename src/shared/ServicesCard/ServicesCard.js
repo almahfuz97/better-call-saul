@@ -3,9 +3,9 @@ import React from 'react'
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link } from 'react-router-dom';
 
-export default function ServicesCard({ service }) {
-    const { service_name, description, price, rating, service_img, _id } = service;
-
+export default function ServicesCard({ service, review }) {
+    const { service_name, description, price, rating, service_img, _id, description2 } = service;
+    const desArr = description2 && description2.split('+');
     return (
         <div>
             <div className="">
@@ -14,7 +14,7 @@ export default function ServicesCard({ service }) {
                 >
                     <PhotoProvider>
                         <PhotoView src={service_img}>
-                            <img src={service_img} alt="" />
+                            <img src={service_img} alt="service image" />
                         </PhotoView>
                     </PhotoProvider>
                     <Tooltip content={service_name}>
@@ -33,11 +33,31 @@ export default function ServicesCard({ service }) {
 
                     <p style={{ wordBreak: "break-all" }} className=' text-sm opacity-50'>
                         {
-                            description.length >= 100
-                                ? `${description.slice(0, 100)}...`
-                                : service_name
+                            review
+                                ?
+                                description
+                                :
+                                description.length >= 100
+                                    ? `${description.slice(0, 100)}...`
+                                    : service_name
                         }
                     </p>
+                    {
+                        review &&
+                        desArr?.map((item, index) => {
+
+                            return (
+                                index === 0
+                                    ?
+                                    <p key={item}> {item}:</p>
+                                    :
+                                    <li key={item}>{item}</li>
+                            )
+
+
+                        }
+                        )
+                    }
 
                     <div className="mt-2.5 mb-5 flex items-center">
                         {
@@ -66,13 +86,15 @@ export default function ServicesCard({ service }) {
                         <span className="text-3xl font-bold text-gray-900 dark:text-white">
                             ${price}
                         </span>
-                        <Link to={`/service/${_id}`}>
-                            <Button
-                                color="dark"
-                            >
-                                Details
-                            </Button>
-                        </Link>
+                        {
+                            review || <Link to={`/service/${_id}`}>
+                                <Button
+                                    color="dark"
+                                >
+                                    Details
+                                </Button>
+                            </Link>
+                        }
                     </div>
                 </Card>
             </div>
