@@ -23,7 +23,7 @@ export default function Header() {
                 <Navbar.Brand >
 
                     <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">
-                        Better Call Me
+                        Better Call Saul
                     </span>
                 </Navbar.Brand>
                 <div className={`${user ? 'flex' : 'hidden'}  md:order-2`}>
