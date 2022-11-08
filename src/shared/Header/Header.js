@@ -1,14 +1,24 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react'
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, Navigate, NavLink } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
 
 export default function Header() {
     const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => localStorage.removeItem('service-token'))
+            .catch(err => {
+                alert("There was a problem signing out!");
+                console.log(err)
+            })
+    }
     return (
         <Navbar
             fluid={true}
             rounded={true}
+            className=' py-8'
         >
             <Navbar.Brand >
 
@@ -39,18 +49,19 @@ export default function Header() {
             </div>
             <Navbar.Collapse>
                 <NavLink
-                    to="/"
+                    to='/'
+
                 >
-                    Home
+                    home
                 </NavLink>
 
                 {
                     !user?.email ?
-                        <NavLink to="/login">
+                        <NavLink to='/login' >
                             Login
                         </NavLink>
                         :
-                        <NavLink onClick={() => logOut()}>
+                        <NavLink onClick={handleLogOut}>
                             Logout
                         </NavLink>
                 }
