@@ -1,5 +1,6 @@
+import { Button } from 'flowbite-react';
 import React from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import Banner from './Banner/Banner'
 import ServicesCard from './ServicesCard/ServicesCard';
 
@@ -19,6 +20,13 @@ export default function Home() {
                     {
                         services.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
                     }
+                </div>
+                <div className='flex justify-center mt-8 p-4'>
+                    <Link to='/services'>
+                        <Button color="light">
+                            See All
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>

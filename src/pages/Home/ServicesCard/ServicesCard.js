@@ -1,16 +1,22 @@
-import { Card, Tooltip } from 'flowbite-react';
+import { Button, Card, Tooltip } from 'flowbite-react';
 import React from 'react'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { Link } from 'react-router-dom';
 
 export default function ServicesCard({ service }) {
-    const { service_name, description, price, rating, service_img } = service;
+    const { service_name, description, price, rating, service_img, _id } = service;
 
     return (
         <div>
             <div className="">
+
                 <Card
-                    imgAlt="service image"
-                    imgSrc={service_img}
                 >
+                    <PhotoProvider>
+                        <PhotoView src={service_img}>
+                            <img src={service_img} alt="" />
+                        </PhotoView>
+                    </PhotoProvider>
                     <Tooltip content={service_name}>
                         <h5 className="text-md hidden md:flex font-semibold tracking-tight text-gray-900 dark:text-white">
                             {
@@ -19,10 +25,19 @@ export default function ServicesCard({ service }) {
                                     : service_name
                             }
                         </h5>
-                        <h5 className="text-md md:hidden font-semibold tracking-tight text-gray-900 dark:text-white">
-                            {service_name}
-                        </h5>
                     </Tooltip>
+
+                    <h5 className="text-md md:hidden font-semibold tracking-tight text-gray-900 dark:text-white">
+                        {service_name}
+                    </h5>
+
+                    <p style={{ wordBreak: "break-all" }} className=' text-sm opacity-50'>
+                        {
+                            description.length >= 100
+                                ? `${description.slice(0, 100)}...`
+                                : service_name
+                        }
+                    </p>
 
                     <div className="mt-2.5 mb-5 flex items-center">
                         {
@@ -30,6 +45,7 @@ export default function ServicesCard({ service }) {
                             [...Array(rating).keys()].map((r) => {
                                 return (
                                     <svg
+                                        key={r}
                                         className="h-5 w-5 text-yellow-300"
                                         fill="currentColor"
                                         viewBox="0 0 20 20"
@@ -50,12 +66,13 @@ export default function ServicesCard({ service }) {
                         <span className="text-3xl font-bold text-gray-900 dark:text-white">
                             ${price}
                         </span>
-                        <a
-                            href="#"
-                            className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        >
-                            Details
-                        </a>
+                        <Link to={`/service/${_id}`}>
+                            <Button
+                                color="dark"
+                            >
+                                Details
+                            </Button>
+                        </Link>
                     </div>
                 </Card>
             </div>
