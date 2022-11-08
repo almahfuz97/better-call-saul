@@ -1,10 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
+import Main from "../layouts/Main";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Home from "../pages/Home/Home";
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
-        loader: () => fetch('https://service-a11-server.vercel.app')
+        element: <Main />,
+        children: [
+            {
+                path: '/',
+                element: <Home />
+            },
+            {
+                path: '*',
+                element: <ErrorPage />
+            }
+        ]
     }
 ])

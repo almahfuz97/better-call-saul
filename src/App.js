@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { Card } from 'flowbite-react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/allRoutes';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello there</h1>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
