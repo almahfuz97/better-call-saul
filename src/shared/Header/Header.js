@@ -15,57 +15,64 @@ export default function Header() {
             })
     }
     return (
-        <Navbar
-            fluid={true}
-            rounded={true}
-            className=' py-8'
-        >
-            <Navbar.Brand >
+        <div className='py-4'>
+            <Navbar
+                fluid={true}
+                rounded={true}
+            >
+                <Navbar.Brand >
 
-                <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">
-                    Better Call Me
-                </span>
-            </Navbar.Brand>
-            <div className={`${user ? 'flex' : 'hidden'}  md:order-2`}>
-                <Dropdown
-                    arrowIcon={false}
-                    inline={true}
-                    label={<Avatar alt="User settings" img={user?.photoURL} rounded={true} />}
-                >
-                    <Dropdown.Header>
-                        <span className="block text-sm font-bold">
-                            {user?.displayName}
-                        </span>
-                        <span className="block truncate text-sm font-medium">
-                            {user?.email}
-                        </span>
-                    </Dropdown.Header>
-                    <Dropdown.Divider />
-                    <Dropdown.Item>
-                        Sign out
-                    </Dropdown.Item>
-                </Dropdown>
-                <Navbar.Toggle />
-            </div>
-            <Navbar.Collapse>
-                <NavLink
-                    to='/'
+                    <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">
+                        Better Call Me
+                    </span>
+                </Navbar.Brand>
+                <div className={`${user ? 'flex' : 'hidden'}  md:order-2`}>
+                    <Dropdown
+                        arrowIcon={false}
+                        inline={true}
+                        label={<Avatar alt="User settings" img={user?.photoURL} rounded={true} />}
+                    >
+                        <Dropdown.Header>
+                            <span className="block text-sm font-bold">
+                                {user?.displayName}
+                            </span>
+                            <span className="block truncate text-sm font-medium">
+                                {user?.email}
+                            </span>
+                        </Dropdown.Header>
+                        <Dropdown.Divider />
+                        <Dropdown.Item>
+                            Sign out
+                        </Dropdown.Item>
+                    </Dropdown>
+                    <Navbar.Toggle />
+                </div>
+                <Navbar.Collapse>
+                    <NavLink
+                        to='/'
+                        className={({ isActive }) => isActive ? " text-red-500" : ''}
+                    >
+                        Home
+                    </NavLink>
 
-                >
-                    home
-                </NavLink>
-
-                {
-                    !user?.email ?
-                        <NavLink to='/login' >
-                            Login
-                        </NavLink>
-                        :
-                        <NavLink onClick={handleLogOut}>
-                            Logout
-                        </NavLink>
-                }
-            </Navbar.Collapse>
-        </Navbar>
+                    {
+                        !user?.email ?
+                            <NavLink
+                                to='/login'
+                                className={({ isActive }) => isActive ? " text-red-500" : ''}
+                            >
+                                Login
+                            </NavLink>
+                            :
+                            <NavLink
+                                onClick={handleLogOut}
+                                className={({ isActive }) => isActive ? " text-red-500" : ''}
+                            >
+                                Logout
+                            </NavLink>
+                    }
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
     )
 }
