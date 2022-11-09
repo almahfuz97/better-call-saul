@@ -14,7 +14,7 @@ export default function ServicesCard({ service, review }) {
                 >
                     <PhotoProvider>
                         <PhotoView src={service_img}>
-                            <img src={service_img} alt="service image" />
+                            <img src={service_img} alt="" />
                         </PhotoView>
                     </PhotoProvider>
                     <Tooltip content={service_name}>
