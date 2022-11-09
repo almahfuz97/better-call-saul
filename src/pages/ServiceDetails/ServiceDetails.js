@@ -17,13 +17,10 @@ export default function ServiceDetails() {
     const [comment, setComment] = useState('');
     const { service, reviews } = useLoaderData();
 
+    const { _id } = service;
+
     const location = useLocation();
-    const handleComment = () => {
 
-    }
-    const commentOnChange = () => {
-
-    }
     return (
         <div className='mt-8  mx-4'>
             <div className=' relative'>
@@ -50,7 +47,7 @@ export default function ServiceDetails() {
                                 <div className='flex justify-center mb-8 font-bold'>
                                     <h2>Write a Review</h2>
                                 </div>
-                                <ReviewForm />
+                                <ReviewForm serviceId={_id} />
                             </>
                             :
                             <div className='flex justify-center mb-16 '>
@@ -63,7 +60,7 @@ export default function ServiceDetails() {
                 </div>
                 <div >
                     {
-                        reviews && reviews.map(com => <ReviewCard key={com._id} com={com}></ReviewCard>)
+                        reviews && reviews.map(review => <ReviewCard key={review._id} com={review}></ReviewCard>)
                     }
                 </div>
             </div>

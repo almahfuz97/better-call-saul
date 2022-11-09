@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
             {
                 path: '/service/:id',
                 element: <ServiceDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`),
+                loader: ({ params }) => fetch(`https://service-a11-server.vercel.app/service/${params.id}`),
                 errorElement: <ErrorPage />
             },
             {
