@@ -8,6 +8,7 @@ import { Toast } from 'flowbite-react';
 import pfp from '../../assets/profile.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ReviewCard from '../../shared/ReviewCard/ReviewCard';
+import ServiceDetailsInfo from './ServiceDetailsInfo';
 
 export default function ServiceDetails() {
     const { user, loading } = useContext(AuthContext);
@@ -21,10 +22,10 @@ export default function ServiceDetails() {
 
     }
     return (
-        <div className='mt-8 grid grid-cols-1 md:grid-cols-12 gap-4 mx-4'>
-            <div className=' col-span-1 md:col-span-6 relative'>
+        <div className='mt-8  mx-4'>
+            <div className=' relative'>
                 <div className=' w-full'>
-                    <ServicesCard review={true} service={service}></ServicesCard>
+                    <ServiceDetailsInfo review={true} service={service}></ServiceDetailsInfo>
 
                 </div>
             </div>
