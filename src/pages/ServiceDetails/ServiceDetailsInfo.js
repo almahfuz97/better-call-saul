@@ -1,7 +1,7 @@
 import React from 'react'
 import RatingStar from '../../utils/RatingStar';
 
-export default function ServiceDetailsInfo({ service, review }) {
+export default function ServiceDetailsInfo({ service, review, totalReviews }) {
     const { service_name, description, price, rating, service_img, _id, description2 } = service;
     const desArr = description2 && description2.split('+');
     return (
@@ -18,7 +18,7 @@ export default function ServiceDetailsInfo({ service, review }) {
                     <RatingStar rating={rating}></RatingStar>
                     <div className='mb-5'>
                         <small className='mr-4 opacity-80'>Price: <span className='text-yellow-400 font-bold'>${price}</span></small>
-                        <small>Total Ratings: <span className=' text-yellow-400 font-bold'>`1005`+</span></small>
+                        <small>Total Ratings: <span className=' text-yellow-400 font-bold'>{totalReviews}+</span></small>
                     </div>
                     <div>
                         {description}

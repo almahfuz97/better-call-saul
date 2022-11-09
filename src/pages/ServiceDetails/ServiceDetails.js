@@ -14,7 +14,7 @@ import ReviewForm from '../../shared/ReviewUtils/ReviewForm';
 export default function ServiceDetails() {
     const { user, loading } = useContext(AuthContext);
     const [toast, setToast] = useState();
-    const { service, reviews } = useLoaderData();
+    const { service, reviews, totalReviews } = useLoaderData();
     const [showReviews, setShowReviews] = useState();
 
     const { _id, service_name } = service;
@@ -34,7 +34,7 @@ export default function ServiceDetails() {
         <div className='mt-8  mx-4'>
             <div className=' relative'>
                 <div className=' w-full'>
-                    <ServiceDetailsInfo review={true} service={service}></ServiceDetailsInfo>
+                    <ServiceDetailsInfo review={true} service={service} totalReviews={totalReviews}></ServiceDetailsInfo>
 
                 </div>
             </div>
@@ -67,7 +67,7 @@ export default function ServiceDetails() {
                 <div>
                     <h1 className=' font-bold text-center my-20 text-xl'>All Reviews</h1>
                 </div>
-                <div >
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2 px-4 md:px-20'>
                     {
                         showReviews && showReviews.map(review => <ReviewCard key={review._id} review={review}></ReviewCard>)
                     }

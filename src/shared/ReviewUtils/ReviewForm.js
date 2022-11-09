@@ -3,12 +3,14 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
 import pfp from '../../assets/profile.svg'
 import { useForm } from 'react-hook-form';
 import { data } from 'autoprefixer';
+import Spin from '../Spinner/Spin';
 
 export default function ReviewForm({ service, newReviews }) {
     const { service_name, _id } = service;
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, watch, submittedData, formState, formState: { errors }, reset } = useForm();
     const [rating, setRating] = useState(5);
+    const [loading, setLoading] = useState(false);
 
     // set rating on select, using 'watch' of use form
     useEffect(() => {
@@ -34,6 +36,7 @@ export default function ReviewForm({ service, newReviews }) {
 
     // onSubmit
     const onSubmit = data => {
+        setLoading(true);
         console.log(data);
         setRating(data.rating);
 
@@ -61,8 +64,12 @@ export default function ReviewForm({ service, newReviews }) {
                 console.log(data.result);
                 console.log(data.reviews);
                 newReviews(data.reviews);
+                setLoading(false);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setLoading(false)
+                console.log(err)
+            })
     }
 
 
@@ -72,8 +79,11 @@ export default function ReviewForm({ service, newReviews }) {
                 <div className='mr-2'>
                     {profileImg}
                 </div>
-                <div className='w-full '>
+                <div className='w-full relative '>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        {
+                            loading && <div className='absolute top-0 left-1/2'><Spin /></div>
+                        }
                         <textarea {...register('reviewText', { required: true })} className=' min-h-[100px] w-full rounded' placeholder='write your review...' />
                         <div className='flex items-center mt-4' >
                             <p className='mr-2 font-bold'>Rating:</p>

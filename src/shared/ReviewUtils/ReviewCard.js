@@ -18,7 +18,7 @@ export default function ReviewCard({ review }) {
         </div>
 
     return (
-        <div className='mx-20 mb-8'>
+        <div className='mb-8 p-4 rounded-lg shadow'>
             <div className='flex '>
                 <div className='relative '>
                     {profileImg}
