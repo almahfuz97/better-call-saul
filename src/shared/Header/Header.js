@@ -81,15 +81,24 @@ export default function Header() {
                     >
                         Home
                     </NavLink>
+                    <NavLink
+                        to='/services'
+                        className={({ isActive }) => isActive ? " text-red-500" : ''}
+                    >
+                        Services
+                    </NavLink>
 
                     {
                         !user?.email ?
-                            <NavLink
-                                to='/login'
-                                className={({ isActive }) => isActive ? " text-red-500" : ''}
-                            >
-                                Login
-                            </NavLink>
+                            <>
+                                <NavLink
+                                    to='/login'
+                                    className={({ isActive }) => isActive ? " text-red-500" : ''}
+                                >
+                                    Login
+                                </NavLink>
+
+                            </>
                             :
                             <>
                                 <NavLink

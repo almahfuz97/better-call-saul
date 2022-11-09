@@ -3,18 +3,21 @@ import { PhotoProvider, PhotoView } from 'react-photo-view'
 import fist from '../../assets/fist.png'
 import 'react-photo-view/dist/react-photo-view.css';
 import ServicesCard from '../../shared/ServicesCard/ServicesCard';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { Toast } from 'flowbite-react';
 import pfp from '../../assets/profile.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
-import ReviewCard from '../../shared/ReviewCard/ReviewCard';
+import ReviewCard from '../../shared/ReviewUtils/ReviewCard';
 import ServiceDetailsInfo from './ServiceDetailsInfo';
+import ReviewForm from '../../shared/ReviewUtils/ReviewForm';
 
 export default function ServiceDetails() {
     const { user, loading } = useContext(AuthContext);
     const [toast, setToast] = useState();
     const [comment, setComment] = useState('');
     const { service, reviews } = useLoaderData();
+
+    const location = useLocation();
     const handleComment = () => {
 
     }
@@ -29,7 +32,7 @@ export default function ServiceDetails() {
 
                 </div>
             </div>
-            <div className=' md:col-span-6'>
+            <div className=' mt-20 relative '>
                 {
                     <Toast className={` absolute top-4 ${toast ? 'flex' : 'hidden'}`}>
 
@@ -40,24 +43,25 @@ export default function ServiceDetails() {
                     </Toast>
                 }
                 <div>
-                    <div className='flex items-center space-x-3'>
-                        <div className='relative'>
-                            <img src={pfp} alt="" className='absolute -z-10 top-0 w-16 h-16 rounded-full mr-4' />
-                            <img src={user?.photoURL} alt="" className=' z-50 w-16 h-16 rounded-full mr-4' />
-
-                        </div>
-                        <div className=' w-4/5'>
-                            <input onChange={commentOnChange} name="comment" value={comment} type="text" className='border rounded-3xl w-full' placeholder='write your review...' />
-                        </div>
-                    </div>
-                    <div className=' flex justify-end'>
-                        <button onClick={handleComment} className='border rounded-lg drop-shadow-md hover:bg-slate-50 text-end p-2 mr-12'>Post Review</button>
-                    </div>
+                    {
+                        user
+                            ?
+                            <>
+                                <div className='flex justify-center mb-8 font-bold'>
+                                    <h2>Write a Review</h2>
+                                </div>
+                                <ReviewForm />
+                            </>
+                            :
+                            <div className='flex justify-center mb-16 '>
+                                <p className='bg-gradient-to-l from-slate-100 to-red-50 p-4 text-xl rounded'><Link className='hover:text-red-700 underline text-red-500' to='/login' state={{ from: location }}>Login</Link> to write a review</p>
+                            </div>
+                    }
                 </div>
                 <div>
-                    <h1 className=' font-bold text-center my-6 text-xl'>Reviews</h1>
+                    <h1 className=' font-bold text-center my-20 text-xl'>All Reviews</h1>
                 </div>
-                <div>
+                <div >
                     {
                         reviews && reviews.map(com => <ReviewCard key={com._id} com={com}></ReviewCard>)
                     }

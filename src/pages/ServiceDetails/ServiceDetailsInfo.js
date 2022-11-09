@@ -6,7 +6,7 @@ export default function ServiceDetailsInfo({ service, review }) {
     return (
         <div className='grid grid-cols-12 mt-8'>
             <div className=' col-span-12 md:col-span-6 relative   flex items-center justify-center'>
-                <img src={service_img} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none' />
+                <img src={service_img} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none rounded-bl-none md:rounded' />
             </div>
             <div className=' col-span-12 md:col-span-6 px-4 pb-4  overflow-y-scroll h-[512px] border-4 pt-4 '>
                 <div>
