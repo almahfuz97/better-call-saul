@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react'
 import app from '../../firebase/firebase.config';
 
@@ -26,6 +26,22 @@ export default function AuthProvider({ children }) {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // update user
+    const updateUser = (userInfo) => {
+        setLoading(true);
+        return (
+            updateProfile(auth.currentUser, userInfo)
+                .then((res) => {
+                    console.log('profile updated successfully');
+                    console.log(user);
+                    setLoading(false)
+                })
+                .catch(err => {
+                    setLoading(false)
+                    console.log(err)
+                }
+                ))
+    }
     // logOut
     const logOut = () => {
         return signOut(auth);
@@ -45,7 +61,7 @@ export default function AuthProvider({ children }) {
 
 
     // objects to share with all children
-    const authInfo = { user, loading, logOut, providerSignIn, createUser, signIn, setLoading }
+    const authInfo = { user, loading, logOut, providerSignIn, createUser, signIn, setLoading, updateUser }
 
     return (
         <AuthContext.Provider value={authInfo}>

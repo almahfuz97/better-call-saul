@@ -1,12 +1,16 @@
 import { Button } from 'flowbite-react';
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
 import Banner from './Banner/Banner'
 import ServicesCard from '../../shared/ServicesCard/ServicesCard';
 import './Home.css'
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Spin from '../../shared/Spinner/Spin';
 
 export default function Home() {
     const services = useLoaderData();
+    const { user, loading } = useContext(AuthContext);
+
     return (
         <div className=''>
             <Banner />

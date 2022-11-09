@@ -1,13 +1,16 @@
 import { Button } from 'flowbite-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Spin from '../../../shared/Spinner/Spin';
 import './Banner.css'
+import man from '../../../assets/bg.jpg'
 
 export default function Banner() {
-    const navigate = useNavigate();
+
     return (
         <div className='img-gradient relative'>
             <img src="https://i.ibb.co/2sZDYdY/saulgoodman.jpg" alt="" className='w-full' />
+            {/* <img src={man} alt="" className='w-full' /> */}
 
             <div className='flex justify-center md:justify-start'>
                 <h1 className=' text-white w-1/2  top-1/4 text-center text-md sm:text-lg md:mx-12 md:top-1/4 md:left-36 md:w-1/3 font-bold z-10 absolute  md:text-start  text-md  md:text-2xl lg:text-5xl xl:text-5xl'>AN IMMIGRATION & CRIMINAL DEFENSE LAWYER.</h1>

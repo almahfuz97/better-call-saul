@@ -9,25 +9,29 @@ import Spin from '../../shared/Spinner/Spin'
 const provider = new GoogleAuthProvider();
 export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, providerSignIn, signIn, loading } = useContext(AuthContext);
+    const { user, providerSignIn, signIn, loading, setLoading } = useContext(AuthContext);
     const location = useLocation();
     const from = location?.state?.from || '/';
     const navigate = useNavigate();
     const [err, setErr] = useState('');
+    const [spinner, setSpinner] = useState(false);
 
     // login with email pass
     const onSubmit = data => {
-        console.log(data)
+        console.log(data);
+        setSpinner(true)
         signIn(data.email, data.password)
             .then(result => {
                 const u = result.user;
                 const userEmail = u.email;
                 console.log(u);
                 setErr('')
+                setSpinner(false)
             })
             .catch(err => {
                 console.log(err);
                 setErr("Invalid Credentials!")
+                setSpinner(false);
             })
 
     }
@@ -48,7 +52,10 @@ export default function Login() {
     if (user) return <Navigate to={from} />
     return (
         <div className='flex justify-center mt-12 mx-4'>
-            <div className='border p-8 rounded-lg'>
+            {
+                spinner && <div className='absolute top-1/2 z-10'><Spin /></div>
+            }
+            <div className='border p-8 rounded-lg md:w-96'>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4  ">
                     <div>
                         <div className=' text-red-500'>{err}</div>
@@ -80,8 +87,8 @@ export default function Login() {
                         />
                     </div>
 
-                    <Button type="submit">
-                        Submit
+                    <Button type="submit" className='mt-4'>
+                        Login
                     </Button>
                     <div className="flex items-center">
                         <small>Don't have an account? <Link to='/register'><span className=' text-red-500 hover:text-red-600'>Register Here</span></Link></small>
@@ -89,10 +96,9 @@ export default function Login() {
                     <div className="flex items-center justify-center">
                         <p className='  '>Or</p>
                     </div>
-
                 </form>
                 <div className="flex items-center justify-center">
-                    <button onClick={handleGoogle} className=' rounded-lg hover:shadow hover:bg-slate-100 p-2 text-red-400'>Continue with Google</button>
+                    <button onClick={handleGoogle} className=' rounded-lg hover:shadow hover:bg-slate-100 mt-2 p-2 text-red-400'>Continue with Google</button>
                 </div>
             </div>
 
