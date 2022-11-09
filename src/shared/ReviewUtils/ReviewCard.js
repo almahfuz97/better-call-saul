@@ -1,21 +1,36 @@
 import React from 'react'
 import pfp from '../../assets/profile.svg'
+import RatingStar from '../../utils/RatingStar';
 
 
-export default function ReviewCard({ com }) {
-    const { photoURL, displayName, review } = com;
+export default function ReviewCard({ review }) {
+    const { profileURL, displayName, reviewText, rating, } = review;
+
+    // profileIMage
+    const profileImg =
+        <div className='relative flex items-center'>
+            <img src={profileURL} onError={(e) => {
+                if (e.target.src !== pfp) {
+                    e.target.onError = null;
+                    e.target.src = pfp
+                }
+            }} className=' bg-transparent z-10 cursor-pointer w-8 h-8 rounded-full mr-4' />
+        </div>
+
     return (
-        <div className='flex p-4 '>
-            <div className='relative w-20 mr-2'>
-                <img src={pfp} alt="" className='absolute -z-10 top-0 w-12 h-12 rounded-full mr-4' />
-                <img src={photoURL} alt="" className=' z-50 w-12 h-12 rounded-full mr-4' />
-
+        <div className='mx-20 mb-8'>
+            <div className='flex '>
+                <div className='relative '>
+                    {profileImg}
+                </div>
+                <div className='w-full  rounded'>
+                    <h3 className='font-semibold'>{displayName}</h3>
+                </div>
             </div>
-            <div className='w-full space-y-0 border p-2 rounded'>
-                <h3 className='font-bold'>{displayName}</h3>
-                <p className='w-full'>
-                    {review}
-                </p>
+            <RatingStar rating={rating} />
+
+            <div>
+                <small className='opacity-80'>{reviewText}</small>
             </div>
         </div>
     )

@@ -4,15 +4,16 @@ import pfp from '../../assets/profile.svg'
 import { useForm } from 'react-hook-form';
 import { data } from 'autoprefixer';
 
-export default function ReviewForm({ serviceId }) {
+export default function ReviewForm({ service, newReviews }) {
+    const { service_name, _id } = service;
     const { user } = useContext(AuthContext);
-    const { register, handleSubmit, watch, submittedData, formState, formState: { errors, isSubmitSuccessful }, reset } = useForm();
+    const { register, handleSubmit, watch, submittedData, formState, formState: { errors }, reset } = useForm();
     const [rating, setRating] = useState(5);
 
     // set rating on select, using 'watch' of use form
     useEffect(() => {
         setRating(watch('rating'))
-    }, [watch('rating')])
+    }, [watch])
 
     // resetting form
     useEffect(() => {
@@ -39,15 +40,16 @@ export default function ReviewForm({ serviceId }) {
         const reviewData = {
             ...data,
             email: user.email,
-            serviceId,
+            serviceId: _id,
             displayName: user.displayName,
             createdAt: Date.now(),
             profileURL: user.photoURL,
+            service_name
 
         }
         console.log(reviewData)
 
-        fetch(`http://localhost:5000/review/service/${serviceId}`, {
+        fetch(`https://service-a11-server.vercel.app/review/service/${_id}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -58,6 +60,7 @@ export default function ReviewForm({ serviceId }) {
             .then(data => {
                 console.log(data.result);
                 console.log(data.reviews);
+                newReviews(data.reviews);
             })
             .catch(err => console.log(err))
     }

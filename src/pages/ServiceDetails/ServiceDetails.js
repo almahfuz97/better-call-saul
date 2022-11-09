@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import fist from '../../assets/fist.png'
 import 'react-photo-view/dist/react-photo-view.css';
@@ -14,13 +14,22 @@ import ReviewForm from '../../shared/ReviewUtils/ReviewForm';
 export default function ServiceDetails() {
     const { user, loading } = useContext(AuthContext);
     const [toast, setToast] = useState();
-    const [comment, setComment] = useState('');
     const { service, reviews } = useLoaderData();
+    const [showReviews, setShowReviews] = useState();
 
-    const { _id } = service;
-
+    const { _id, service_name } = service;
+    console.log(reviews);
     const location = useLocation();
 
+    // set reviews 
+    useEffect(() => {
+        setShowReviews(reviews);
+    }, [])
+
+    const newReviews = (data) => {
+        console.log(data)
+        setShowReviews(data);
+    }
     return (
         <div className='mt-8  mx-4'>
             <div className=' relative'>
@@ -47,7 +56,7 @@ export default function ServiceDetails() {
                                 <div className='flex justify-center mb-8 font-bold'>
                                     <h2>Write a Review</h2>
                                 </div>
-                                <ReviewForm serviceId={_id} />
+                                <ReviewForm newReviews={newReviews} service={service} />
                             </>
                             :
                             <div className='flex justify-center mb-16 '>
@@ -60,7 +69,7 @@ export default function ServiceDetails() {
                 </div>
                 <div >
                     {
-                        reviews && reviews.map(review => <ReviewCard key={review._id} com={review}></ReviewCard>)
+                        showReviews && showReviews.map(review => <ReviewCard key={review._id} review={review}></ReviewCard>)
                     }
                 </div>
             </div>
