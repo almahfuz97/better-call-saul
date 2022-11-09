@@ -2,14 +2,15 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import Spin from '../../shared/Spinner/Spin';
 
 const provider = new GoogleAuthProvider();
 
 export default function Register() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { user, createUser, logOut, updateUser } = useContext(AuthContext);
+    const { user, createUser, logOut, updateUser, loading } = useContext(AuthContext);
     const location = useLocation();
     const from = location?.state?.from || '/';
     const navigate = useNavigate();
@@ -27,17 +28,15 @@ export default function Register() {
                 updateUser(userInfo)
                     .then(() => {
                         console.log('profile updated successfully');
-                        logOut();
-
                     })
                     .catch(err => console.log(err))
-                navigate('/login');
             })
             .catch(err => console.log(err))
 
     }
 
-
+    if (loading) return <Spin />
+    if (user) return <Navigate to='/' />
     return (
         <div className='flex justify-center mt-12 mx-4'>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 border p-8 rounded-lg">

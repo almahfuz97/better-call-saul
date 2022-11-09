@@ -45,7 +45,7 @@ export default function AuthProvider({ children }) {
 
 
     // objects to share with all children
-    const authInfo = { user, loading, logOut, providerSignIn, createUser, signIn }
+    const authInfo = { user, loading, logOut, providerSignIn, createUser, signIn, setLoading }
 
     return (
         <AuthContext.Provider value={authInfo}>
