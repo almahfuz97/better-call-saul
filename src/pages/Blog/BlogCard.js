@@ -41,8 +41,8 @@ export default function BlogCard({ blog }) {
                 <p style={{ wordBreak: "break-all" }} className='min-h-[80px] mt-4 max-h-[80px] text-sm opacity-50'>
                     {
 
-                        description.length >= 50
-                            ? `${description.slice(0, 50)}...`
+                        description.length >= 80
+                            ? `${description.slice(0, 80)}...`
                             : description
                     }
                 </p>

@@ -15,7 +15,9 @@ export default function ServicesCard({ service, review }) {
                 >
                     <PhotoProvider>
                         <PhotoView src={service_img}>
-                            <img src={service_img} alt="" className=' max-h-[300px] min-h-[300px] rounded' />
+                            <div className='img-gradient relative'>
+                                <img src={service_img} className='max-h-[300px] min-h-[300px]' />
+                            </div>
                         </PhotoView>
                     </PhotoProvider>
                     <Tooltip content={service_name}>
