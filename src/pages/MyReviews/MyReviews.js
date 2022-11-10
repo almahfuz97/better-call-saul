@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
 import Spin from '../../shared/Spinner/Spin';
-import SuccesfulModal from '../../utils/ConfirmModal/SuccesfulModal';
+import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 import MyReviewCard from './MyReviewCard';
 
 export default function MyReviews() {

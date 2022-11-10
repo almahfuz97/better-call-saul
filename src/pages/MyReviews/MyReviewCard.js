@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import RatingStar from '../../utils/RatingStar';
 import delIcon from '../../assets/delete.png'
 import editIcon from '../../assets/edit.png'
-import ConfirmModal from '../../utils/ConfirmModal/ConfirmModal';
+import ConfirmModal from '../../utils/Modals/ConfirmModal';
 import Spin from '../../shared/Spinner/Spin';
+import UpdateReviewFormModal from '../../utils/Modals/UpdateReviewFormModal';
 
 export default function MyReviewCard({ review, newData }) {
     const { service_name, _id, reviewText, rating, displayName, createdAt, profileURL, email } = review;
     const [popup, setPopup] = useState(false);
+    const [formPopup, setFormPopup] = useState(false);
     const [spinner, setSpinner] = useState(false);
 
     const handleConfirm = (proceed) => {
@@ -38,10 +40,12 @@ export default function MyReviewCard({ review, newData }) {
             }
             <div>
                 <div className='flex items-center justify-between mb-2'>
-                    {/* <img src={profileURL} alt="" className='w-12 h-12 rounded-full mr-2' /> */}
+                    {
+                        formPopup ? <UpdateReviewFormModal review={review} closed={() => setFormPopup(false)} clicked={true} /> : <UpdateReviewFormModal review={review} clicked={false} />
+                    }
                     <div className='flex items-center'>
                         <h3 className=' font-bold mr-4'>{service_name}</h3>
-                        <div className='flex hover:scale-105 cursor-pointer duration-100'>
+                        <div onClick={() => setFormPopup(true)} className='flex hover:scale-105 cursor-pointer duration-100'>
                             <img src={editIcon} alt="" className='w-6 h-6 mr-1 drop-shadow-lg rounded-full  duration-200' />
                             <p>Edit</p>
                         </div>

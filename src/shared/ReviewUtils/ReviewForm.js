@@ -4,7 +4,7 @@ import pfp from '../../assets/profile.svg'
 import { useForm } from 'react-hook-form';
 import { data } from 'autoprefixer';
 import Spin from '../Spinner/Spin';
-import SuccesfulModal from '../../utils/ConfirmModal/SuccesfulModal';
+import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 
 export default function ReviewForm({ service, newReviews }) {
     const { service_name, _id } = service;

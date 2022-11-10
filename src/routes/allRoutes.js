@@ -7,7 +7,7 @@ import MyReviews from "../pages/MyReviews/MyReviews";
 import Register from "../pages/Register/Register";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import Services from "../pages/Services/Services";
-import ConfirmModal from "../utils/ConfirmModal/ConfirmModal";
+import ConfirmModal from "../utils/Modals/ConfirmModal";
 
 export const router = createBrowserRouter([
     {
