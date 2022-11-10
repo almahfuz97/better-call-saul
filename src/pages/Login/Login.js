@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
+import useTitle from '../../hooks/useTitle'
 import Spin from '../../shared/Spinner/Spin'
 
 const provider = new GoogleAuthProvider();
@@ -17,6 +18,7 @@ export default function Login() {
     const [err, setErr] = useState('');
     const [spinner, setSpinner] = useState(false);
 
+    useTitle('Login')
     // login with email pass
     const onSubmit = data => {
         setSpinner(true)

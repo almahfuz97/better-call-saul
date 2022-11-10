@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Navigate, useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
+import useTitle from '../../hooks/useTitle';
 import Spin from '../../shared/Spinner/Spin';
 import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 import MyReviewCard from './MyReviewCard';
@@ -11,6 +12,8 @@ export default function MyReviews() {
     const [spinner, setSpinner] = useState(true);
     const [isDeleted, setIsDeleted] = useState('');
 
+    // set title
+    useTitle('My Reviews')
     // set valid/invalid modal
     const modal = isDeleted === '0'
         ? <SuccesfulModal icon='0' str="Review deleted successfully!" clicked={true} />

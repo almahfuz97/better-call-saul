@@ -10,6 +10,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ReviewCard from '../../shared/ReviewUtils/ReviewCard';
 import ServiceDetailsInfo from './ServiceDetailsInfo';
 import ReviewForm from '../../shared/ReviewUtils/ReviewForm';
+import useTitle from '../../hooks/useTitle';
 
 export default function ServiceDetails() {
     const { user, loading } = useContext(AuthContext);
@@ -19,6 +20,9 @@ export default function ServiceDetails() {
 
     const { _id, service_name } = service;
     const location = useLocation();
+
+    // set title
+    useTitle('Service')
 
     // set reviews 
     useEffect(() => {

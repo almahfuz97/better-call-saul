@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import Spin from '../../shared/Spinner/Spin';
 
 const provider = new GoogleAuthProvider();
@@ -16,6 +17,8 @@ export default function Register() {
     const navigate = useNavigate();
     const [spinner, setSpinner] = useState(false);
 
+    // set title
+    useTitle('Register')
 
     const onSubmit = data => {
         setSpinner(true);

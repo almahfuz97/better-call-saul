@@ -2,6 +2,7 @@ import { registerVersion } from 'firebase/app'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import addImg from '../../assets/imageUpload.png'
+import useTitle from '../../hooks/useTitle';
 import Spin from '../../shared/Spinner/Spin';
 import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 
@@ -10,6 +11,8 @@ export default function AddService() {
     const [spinner, setSpinner] = useState(false);
     const [success, setSuccess] = useState('');
 
+    // set title
+    useTitle('Add Service')
     // resetting form
     useEffect(() => {
         if (formState.isSubmitSuccessful) {

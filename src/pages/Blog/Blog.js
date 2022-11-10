@@ -1,6 +1,7 @@
 import { Accordion } from 'flowbite-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
+import useTitle from '../../hooks/useTitle';
 import Spin from '../../shared/Spinner/Spin';
 import BlogCard from './BlogCard';
 
@@ -8,6 +9,9 @@ export default function Blog() {
     const { user, loading } = useContext(AuthContext);
     const [blogs, setBlogs] = useState();
     const [spinner, setSpinner] = useState(true);
+
+    // set title
+    useTitle('Blog')
 
     useEffect(() => {
         fetch('https://service-a11-server.vercel.app/blogs')

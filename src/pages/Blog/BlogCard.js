@@ -4,6 +4,7 @@ import gallary from '../../assets/gallary.png'
 import './BlogCard.css'
 import { Button, Card, Tooltip } from 'flowbite-react';
 import ReadBlogModal from '../../utils/Modals/ReadBlogModal';
+import '../Home/Banner/Banner.css'
 
 
 export default function BlogCard({ blog }) {

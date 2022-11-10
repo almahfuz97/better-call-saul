@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { set } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 import ServicesCard from '../../shared/ServicesCard/ServicesCard';
 import Spin from '../../shared/Spinner/Spin';
 
@@ -10,6 +11,8 @@ export default function Services() {
     const [services, setServices] = useState();
     const [spinner, setSpinner] = useState(true);
     const { user, loading } = useContext(AuthContext);
+    //  set title
+    useTitle('Services');
 
     useEffect(() => {
         fetch('https://service-a11-server.vercel.app/services')

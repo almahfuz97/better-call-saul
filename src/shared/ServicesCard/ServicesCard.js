@@ -3,6 +3,9 @@ import React from 'react'
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link } from 'react-router-dom';
 import RatingStar from '../../utils/RatingStar';
+import '../../pages/Home/Banner/Banner.css'
+import gallary from '../../assets/bg.jpg'
+
 
 export default function ServicesCard({ service, review }) {
     const { service_name, description, price, rating, service_img, _id, description2 } = service;
@@ -15,9 +18,13 @@ export default function ServicesCard({ service, review }) {
                 >
                     <PhotoProvider>
                         <PhotoView src={service_img}>
-                            <div className='img-gradient relative'>
-                                <img src={service_img} className='max-h-[300px] min-h-[300px]' />
-                            </div>
+
+                            <img src={service_img} onError={(e) => {
+                                if (e.target.src !== gallary) {
+                                    e.target.src = gallary
+                                }
+                            }} className='max-h-[300px] min-h-[300px] rounded' />
+
                         </PhotoView>
                     </PhotoProvider>
                     <Tooltip content={service_name}>

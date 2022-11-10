@@ -6,11 +6,14 @@ import ServicesCard from '../../shared/ServicesCard/ServicesCard';
 import './Home.css'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Spin from '../../shared/Spinner/Spin';
+import useTitle from '../../hooks/useTitle';
 
 export default function Home() {
     const [services, setServices] = useState();
     const [spinner, setSpinner] = useState(true);
     const { user, loading } = useContext(AuthContext);
+
+    useTitle('Home')
 
     useEffect(() => {
 

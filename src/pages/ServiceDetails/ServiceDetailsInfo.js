@@ -1,6 +1,8 @@
 import React from 'react'
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import RatingStar from '../../utils/RatingStar';
+import '../Home/Banner/Banner.css'
+import gallary from '../../assets/bg.jpg'
 
 export default function ServiceDetailsInfo({ service, review, totalReviews }) {
     const { service_name, description, price, rating, service_img, _id, description2 } = service;
@@ -11,7 +13,11 @@ export default function ServiceDetailsInfo({ service, review, totalReviews }) {
 
                 <PhotoProvider>
                     <PhotoView src={service_img}>
-                        <img src={service_img} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none rounded-bl-none md:rounded' />
+                        <img src={service_img} onError={(e) => {
+                            if (e.target.src !== gallary) {
+                                e.target.src = gallary;
+                            }
+                        }} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none rounded-bl-none md:rounded' />
                     </PhotoView>
                 </PhotoProvider>
             </div>
