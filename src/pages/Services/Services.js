@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { set } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ServicesCard from '../../shared/ServicesCard/ServicesCard';
+import Spin from '../../shared/Spinner/Spin';
 
 export default function Services() {
-    const services = useLoaderData();
+    console.log('here')
+    const [services, setServices] = useState();
+    const [spinner, setSpinner] = useState(true);
+    const { user, loading } = useContext(AuthContext);
+
+    useEffect(() => {
+        fetch('https://service-a11-server.vercel.app/services')
+            .then(res => res.json())
+            .then(data => {
+                setSpinner(false)
+                setServices(data)
+            })
+    }, [])
+
     return (
         <div className='mx-4 md:mx-20 mt-4'>
             <div className='flex justify-center'>
@@ -12,9 +28,12 @@ export default function Services() {
                     <p className='text-center text-xs md:text-base opacity-50'>Explore our services to see what you need.</p>
                 </div>
             </div>
+            <div className='mt-8'>
+                {spinner && <Spin />}
+            </div>
             <div className='mt-8 md:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
-                    services.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
+                    services?.map(service => <ServicesCard key={service._id} service={service}></ServicesCard>)
                 }
             </div>
         </div>

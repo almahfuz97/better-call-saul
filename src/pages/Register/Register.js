@@ -12,7 +12,7 @@ export default function Register() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user, createUser, logOut, updateUser, loading } = useContext(AuthContext);
     const location = useLocation();
-    const from = location?.state?.from2 || '/';
+    const from = location?.state?.from2 || '/home';
     const navigate = useNavigate();
     const [spinner, setSpinner] = useState(false);
 
@@ -39,7 +39,7 @@ export default function Register() {
     }
 
     if (loading) return <Spin />
-    if (user) return <Navigate to='/' />
+    if (user) return <Navigate to='/home' />
     return (
         <div className='flex justify-center mt-12 mx-4 '>
             {

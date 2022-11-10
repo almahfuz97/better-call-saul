@@ -7,11 +7,12 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
 import Spin from '../../shared/Spinner/Spin'
 
 const provider = new GoogleAuthProvider();
+
 export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user, providerSignIn, signIn, loading, setLoading } = useContext(AuthContext);
     const location = useLocation();
-    const from = location?.state?.from || '/';
+    const from = location?.state?.from || '/home';
     const navigate = useNavigate();
     const [err, setErr] = useState('');
     const [spinner, setSpinner] = useState(false);
@@ -49,11 +50,14 @@ export default function Login() {
     if (user) return <Navigate to={from} />
     return (
         <div className='flex justify-center mt-12 mx-4'>
-            {
-                spinner && <div className='absolute top-1/2 z-10'><Spin /></div>
-            }
+
             <div className='border p-8 rounded-lg md:w-96'>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4  ">
+                    <div>
+                        {
+                            spinner && <Spin />
+                        }
+                    </div>
                     <div>
                         <div className=' text-red-500'>{err}</div>
                         <div className="mb-2 block">
@@ -88,7 +92,7 @@ export default function Login() {
                         Login
                     </Button>
                     <div className="flex items-center">
-                        <small>Don't have an account? <Link to='/register'><span className=' text-red-500 hover:text-red-600'>Register Here</span></Link></small>
+                        <small>Don't have an account? <Link to='/register' state={{ from2: from }}><span className=' text-red-500 hover:text-red-600'>Register Here</span></Link></small>
                     </div>
                     <div className="flex items-center justify-center">
                         <p className='  '>Or</p>

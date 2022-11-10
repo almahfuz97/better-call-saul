@@ -74,7 +74,7 @@ export default function Header() {
 
                 <Navbar.Collapse>
                     <NavLink
-                        to='/'
+                        to='/home'
                         className={({ isActive }) => isActive ? " text-red-500" : ''}
                     >
                         Home

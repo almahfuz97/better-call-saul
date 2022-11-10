@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { Navigate, useLoaderData } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider'
 import Spin from '../../shared/Spinner/Spin';
 import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 import MyReviewCard from './MyReviewCard';
 
 export default function MyReviews() {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState();
-    const [loading, setLoading] = useState(true);
+    const [spinner, setSpinner] = useState(true);
     const [isDeleted, setIsDeleted] = useState('');
 
     // set valid/invalid modal
@@ -41,12 +41,15 @@ export default function MyReviews() {
             .then(res => res.json())
             .then(data => {
                 setMyReviews(data);
-                if (user?.email) setLoading(false)
+                if (user?.email) setSpinner(false)
             })
             .catch(err => console.log(err))
     }, [user?.email])
 
     if (loading) return <Spin />
+    if (!user?.email) return <Navigate to='/login' />
+    if (spinner) return <Spin />
+
     if (myReviews?.length === 0) {
         return (
             <div className=' h-52 justify-center flex mt-36'>

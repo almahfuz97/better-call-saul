@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import Spin from '../../../shared/Spinner/Spin';
 import './Banner.css'
 import man from '../../../assets/bg.jpg'
-
+import saul from '../../../assets/saulgoodman.jpg'
+// https://i.ibb.co/2sZDYdY/saulgoodman.jpg
 export default function Banner() {
 
     return (
         <div className='img-gradient relative'>
-            <img src="https://i.ibb.co/2sZDYdY/saulgoodman.jpg" alt="" className='w-full' />
+
+            <img src='https://i.ibb.co/2sZDYdY/saulgoodman.jpg' alt="" className='w-full' />
             {/* <img src={man} alt="" className='w-full' /> */}
 
             <div className='flex justify-center md:justify-start'>

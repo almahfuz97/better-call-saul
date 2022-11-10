@@ -4,16 +4,16 @@ import logo from '../../assets/logo192.png'
 
 export default function FooterMain() {
     return (
-        <div className='mt-12 border-t-2'>
+        <div className='mt-20 border-t-2'>
             <Footer container={true}>
                 <div className="w-full">
                     <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-                        <div className='flex'>
+                        <div className='flex mb-4'>
                             <Footer.Brand
                                 src={logo}
                                 alt=""
                             />
-                            <h1 className=' text-2xl font-bold'>Better Call Saul</h1>
+                            <h1 className=' text-md md:text-xl font-semibold'>Better Call Saul</h1>
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
                             <div>

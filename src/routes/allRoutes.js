@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
+import AddService from "../pages/AddService/AddService";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -8,6 +9,7 @@ import Register from "../pages/Register/Register";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import Services from "../pages/Services/Services";
 import ConfirmModal from "../utils/Modals/ConfirmModal";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -17,7 +19,10 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />,
-                loader: () => fetch('https://service-a11-server.vercel.app/home')
+            },
+            {
+                path: '/home',
+                element: <Home />,
             },
             {
                 path: '/login',
@@ -31,25 +36,20 @@ export const router = createBrowserRouter([
             {
                 path: '/services',
                 element: <Services />,
-                loader: () => fetch('https://service-a11-server.vercel.app/services'),
-                errorElement: <ErrorPage />
 
             },
             {
                 path: '/service/:id',
                 element: <ServiceDetails />,
                 loader: ({ params }) => fetch(`https://service-a11-server.vercel.app/service/${params.id}`),
-                errorElement: <ErrorPage />
             },
             {
                 path: '/myreviews',
-                element: <MyReviews />,
-                errorElement: <ErrorPage />
+                element: <PrivateRoute> <MyReviews /> </PrivateRoute>
             },
             {
-                path: '/modal',
-                element: <ConfirmModal />,
-                errorElement: <ErrorPage />
+                path: '/addservice',
+                element: <PrivateRoute> <AddService /> </PrivateRoute>
             },
             {
                 path: '*',

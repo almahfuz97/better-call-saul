@@ -1,4 +1,5 @@
 import React from 'react'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 import RatingStar from '../../utils/RatingStar';
 
 export default function ServiceDetailsInfo({ service, review, totalReviews }) {
@@ -7,7 +8,12 @@ export default function ServiceDetailsInfo({ service, review, totalReviews }) {
     return (
         <div className='grid grid-cols-12 mt-8'>
             <div className=' col-span-12 md:col-span-6 relative   flex items-center justify-center'>
-                <img src={service_img} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none rounded-bl-none md:rounded' />
+
+                <PhotoProvider>
+                    <PhotoView src={service_img}>
+                        <img src={service_img} alt="" className='w-full border-4 h-[512px] top-0 rounded rounded-br-none rounded-tr-none rounded-bl-none md:rounded' />
+                    </PhotoView>
+                </PhotoProvider>
             </div>
             <div className=' col-span-12 md:col-span-6 px-4 pb-4  overflow-y-scroll h-[512px] border-4 pt-4 '>
                 <div>
@@ -18,7 +24,7 @@ export default function ServiceDetailsInfo({ service, review, totalReviews }) {
                     <RatingStar rating={rating}></RatingStar>
                     <div className='mb-5'>
                         <small className='mr-4 opacity-80'>Price: <span className='text-yellow-400 font-bold'>${price}</span></small>
-                        <small>Total Ratings: <span className=' text-yellow-400 font-bold'>{totalReviews}+</span></small>
+                        <small>Total Ratings: <span className=' text-yellow-400 font-bold'>{totalReviews}</span></small>
                     </div>
                     <div>
                         {description}
@@ -35,8 +41,6 @@ export default function ServiceDetailsInfo({ service, review, totalReviews }) {
                                         :
                                         <li key={item}>{item}</li>
                                 )
-
-
                             }
                             )
                         }
