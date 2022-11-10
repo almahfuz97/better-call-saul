@@ -13,16 +13,20 @@ export default function AuthProvider({ children }) {
 
     // provider sign in
     const providerSignIn = (provider) => {
+        setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     // create user with email and pass
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     // sign in with email and password
     const signIn = (email, password) => {
+        setLoading(true);
+
         return signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -42,6 +46,7 @@ export default function AuthProvider({ children }) {
     }
     // logOut
     const logOut = () => {
+        localStorage.removeItem('service-token')
         return signOut(auth);
     }
 

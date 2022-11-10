@@ -25,7 +25,25 @@ export default function Login() {
         signIn(data.email, data.password)
             .then(result => {
                 const u = result.user;
-                const userEmail = u.email;
+                const currentUser = {
+                    email: u.email
+                }
+                // jwt
+                fetch(`http://localhost:5000/jwt`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('service-token', data.token);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
                 setErr('')
                 setSpinner(false)
             })
@@ -44,6 +62,21 @@ export default function Login() {
                 const userEmail = {
                     email: user.email,
                 }
+                // jwt
+                fetch(`http://localhost:5000/jwt`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userEmail)
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('service-token', data.token);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             })
             .catch(err => console.log(err))
     }

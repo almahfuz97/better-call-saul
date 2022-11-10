@@ -7,7 +7,7 @@ import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 import MyReviewCard from './MyReviewCard';
 
 export default function MyReviews() {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, logOut } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState();
     const [spinner, setSpinner] = useState(true);
     const [isDeleted, setIsDeleted] = useState('');
@@ -40,14 +40,24 @@ export default function MyReviews() {
     }
 
     useEffect(() => {
-        fetch(`https://service-a11-server.vercel.app/myreviews?email=${user?.email}`)
-            .then(res => res.json())
+        fetch(`https://service-a11-server.vercel.app/myreviews?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('service-token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut()
+                }
+                return res.json()
+            }
+            )
             .then(data => {
                 setMyReviews(data);
                 if (user?.email) setSpinner(false)
             })
             .catch(err => console.log(err))
-    }, [user?.email])
+    }, [user?.email, logOut])
 
     if (loading) return <Spin />
     if (!user?.email) return <Navigate to='/login' />
