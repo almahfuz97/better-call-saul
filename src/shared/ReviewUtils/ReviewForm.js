@@ -4,6 +4,7 @@ import pfp from '../../assets/profile.svg'
 import { useForm } from 'react-hook-form';
 import { data } from 'autoprefixer';
 import Spin from '../Spinner/Spin';
+import SuccesfulModal from '../../utils/ConfirmModal/SuccesfulModal';
 
 export default function ReviewForm({ service, newReviews }) {
     const { service_name, _id } = service;
@@ -11,6 +12,9 @@ export default function ReviewForm({ service, newReviews }) {
     const { register, handleSubmit, watch, submittedData, formState, formState: { errors }, reset } = useForm();
     const [rating, setRating] = useState(5);
     const [loading, setLoading] = useState(false);
+    const [isReviewPosted, setIsReviewPosted] = useState(false);
+
+    console.log(isReviewPosted)
 
     // set rating on select, using 'watch' of use form
     useEffect(() => {
@@ -65,6 +69,13 @@ export default function ReviewForm({ service, newReviews }) {
                 console.log(data.reviews);
                 newReviews(data.reviews);
                 setLoading(false);
+                if (data.result.acknowledged) {
+                    setIsReviewPosted(true);
+                    setTimeout(() => {
+                        setIsReviewPosted(false)
+                    }, 4000);
+                }
+
             })
             .catch(err => {
                 setLoading(false)
@@ -80,6 +91,9 @@ export default function ReviewForm({ service, newReviews }) {
                     {profileImg}
                 </div>
                 <div className='w-full relative '>
+                    {
+                        isReviewPosted ? <SuccesfulModal str="added" clicked={true} /> : <SuccesfulModal clicked={false} />
+                    }
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {
                             loading && <div className='absolute top-0 left-1/2'><Spin /></div>

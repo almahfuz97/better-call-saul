@@ -1,12 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import RatingStar from '../../utils/RatingStar';
 import delIcon from '../../assets/delete.png'
 import editIcon from '../../assets/edit.png'
+import ConfirmModal from '../../utils/ConfirmModal/ConfirmModal';
+import Spin from '../../shared/Spinner/Spin';
 
-export default function MyReviewCard({ review }) {
-    const { service_name, _id, reviewText, rating, displayName, createdAt, profileURL } = review;
+export default function MyReviewCard({ review, newData }) {
+    const { service_name, _id, reviewText, rating, displayName, createdAt, profileURL, email } = review;
+    const [popup, setPopup] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+
+    const handleConfirm = (proceed) => {
+        setPopup(false)
+        if (proceed) {
+            setSpinner(true);
+            fetch(`http://localhost:5000/delete/${_id}?email=${email}`, {
+                method: 'DELETE',
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.result.deletedCount > 0) {
+                        // send new data to parent, MyReviews
+                        newData(data.reviews);
+                    }
+                    setSpinner(false)
+                })
+                .catch(err => {
+                    setSpinner(false);
+                })
+        }
+    }
     return (
-        <div className='mb-4 p-4 shadow rounded-lg'>
+        <div className='mb-4  p-4 shadow rounded-lg'>
+            {
+                spinner && <Spin />
+
+            }
             <div>
                 <div className='flex items-center justify-between mb-2'>
                     {/* <img src={profileURL} alt="" className='w-12 h-12 rounded-full mr-2' /> */}
@@ -17,7 +46,10 @@ export default function MyReviewCard({ review }) {
                             <p>Edit</p>
                         </div>
                     </div>
-                    <img src={delIcon} alt="" className='w-8 h-8 drop-shadow-lg rounded-full hover:scale-105 cursor-pointer duration-200' />
+                    <img onClick={() => setPopup(true)} src={delIcon} alt="" className='w-8 h-8 drop-shadow-lg rounded-full hover:scale-105 cursor-pointer duration-200' />
+                    {
+                        popup && <ConfirmModal clicked={true} confirm={handleConfirm} />
+                    }
                 </div>
                 <div className='mb-4'>
                     <RatingStar rating={rating} />

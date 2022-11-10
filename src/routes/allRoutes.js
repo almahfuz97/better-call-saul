@@ -7,6 +7,7 @@ import MyReviews from "../pages/MyReviews/MyReviews";
 import Register from "../pages/Register/Register";
 import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import Services from "../pages/Services/Services";
+import ConfirmModal from "../utils/ConfirmModal/ConfirmModal";
 
 export const router = createBrowserRouter([
     {
@@ -43,6 +44,11 @@ export const router = createBrowserRouter([
             {
                 path: '/myreviews',
                 element: <MyReviews />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: '/modal',
+                element: <ConfirmModal />,
                 errorElement: <ErrorPage />
             },
             {
