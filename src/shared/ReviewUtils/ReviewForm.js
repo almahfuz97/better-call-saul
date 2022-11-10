@@ -96,11 +96,11 @@ export default function ReviewForm({ service, newReviews }) {
                     {
                         isReviewPosted === '0'
                             ?
-                            <SuccesfulModal icon='0' str="added" clicked={true} />
+                            <SuccesfulModal icon='0' str="Review added successfully!" clicked={true} />
                             :
                             isReviewPosted === '1'
                                 ?
-                                <SuccesfulModal icon='1' str="did not added" clicked={true} />
+                                <SuccesfulModal icon='1' str="Something went wrong!" clicked={true} />
                                 :
                                 <SuccesfulModal clicked={false} />
                     }

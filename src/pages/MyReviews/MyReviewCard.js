@@ -70,11 +70,11 @@ export default function MyReviewCard({ review, newData }) {
                 // show modal 
                 success === '0'
                     ?
-                    <SuccesfulModal icon="0" str='updated' clicked={true} />
+                    <SuccesfulModal icon="0" str='Review updated successfully!' clicked={true} />
                     :
                     success === '1'
                         ?
-                        <SuccesfulModal icon="1" str={'did not updated'} clicked={true} />
+                        <SuccesfulModal icon="1" str='Something went wrong!' clicked={true} />
                         :
                         <SuccesfulModal clicked={false} />
             }

@@ -13,11 +13,11 @@ export default function MyReviews() {
 
     // set valid/invalid modal
     const modal = isDeleted === '0'
-        ? <SuccesfulModal icon='0' str="deleted" clicked={true} />
+        ? <SuccesfulModal icon='0' str="Review deleted successfully!" clicked={true} />
         :
         isDeleted === '1'
             ?
-            <SuccesfulModal icon='1' str='did not deleted' clicked={true} />
+            <SuccesfulModal icon='1' str='Something went wrong!' clicked={true} />
             :
             <SuccesfulModal clicked={false} />
 

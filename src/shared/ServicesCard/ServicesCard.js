@@ -15,11 +15,11 @@ export default function ServicesCard({ service, review }) {
                 >
                     <PhotoProvider>
                         <PhotoView src={service_img}>
-                            <img src={service_img} alt="" />
+                            <img src={service_img} alt="" className=' max-h-[300px] min-h-[300px] rounded' />
                         </PhotoView>
                     </PhotoProvider>
                     <Tooltip content={service_name}>
-                        <h5 className="text-md hidden md:flex font-semibold tracking-tight text-gray-900 dark:text-white">
+                        <h5 className="text-md hidden max-h-[15px] md:flex font-semibold tracking-tight text-gray-900 dark:text-white">
                             {
                                 service_name.length >= 25
                                     ? `${service_name.slice(0, 25)}...`
@@ -28,11 +28,11 @@ export default function ServicesCard({ service, review }) {
                         </h5>
                     </Tooltip>
 
-                    <h5 className="text-md md:hidden font-semibold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="text-md max-h-[10px] md:hidden font-semibold tracking-tight text-gray-900 dark:text-white">
                         {service_name}
                     </h5>
 
-                    <p style={{ wordBreak: "break-all" }} className=' text-sm opacity-50'>
+                    <p style={{ wordBreak: "break-all" }} className='min-h-[70px] max-h-[70px] text-sm opacity-50'>
                         {
                             review
                                 ?
@@ -54,12 +54,9 @@ export default function ServicesCard({ service, review }) {
                                     :
                                     <li key={item}>{item}</li>
                             )
-
-
                         }
                         )
                     }
-
                     <RatingStar rating={rating} />
                     <div className="flex items-center justify-between">
                         <span className="text-3xl font-bold text-gray-900 dark:text-white">
