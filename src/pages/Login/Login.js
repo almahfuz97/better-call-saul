@@ -29,7 +29,7 @@ export default function Login() {
                     email: u.email
                 }
                 // jwt
-                fetch(`http://localhost:5000/jwt`, {
+                fetch(`https://service-a11-server.vercel.app/jwt`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ export default function Login() {
                     email: user.email,
                 }
                 // jwt
-                fetch(`http://localhost:5000/jwt`, {
+                fetch(`https://service-a11-server.vercel.app/jwt`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

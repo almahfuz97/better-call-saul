@@ -9,7 +9,7 @@ export default function Testimonials() {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/testimonials')
+        fetch('https://service-a11-server.vercel.app/testimonials')
             .then(res => res.json())
             .then(data => {
                 setSpinner(false)
