@@ -9,14 +9,29 @@ export default function MyReviews() {
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState();
     const [loading, setLoading] = useState(true);
-    const [isDeleted, setIsDeleted] = useState(false);
+    const [isDeleted, setIsDeleted] = useState('');
+
+    const modal = isDeleted === '0'
+        ? <SuccesfulModal icon='0' str="deleted" clicked={true} />
+        :
+        isDeleted === '1'
+            ?
+            <SuccesfulModal icon='1' str='did not deleted' clicked={true} />
+            :
+            <SuccesfulModal clicked={false} />
+
 
     const handleNewData = (reviews) => {
-        setMyReviews(reviews);
-        setIsDeleted(true);
+        if (reviews) {
+            setMyReviews(reviews);
+            setIsDeleted('0');
+        }
+        else {
+            setIsDeleted('1');
+        }
 
         setTimeout(() => {
-            setIsDeleted(false);
+            setIsDeleted('');
         }, 4000);
     }
 
@@ -35,7 +50,8 @@ export default function MyReviews() {
         return (
             <div className=' h-52 justify-center flex mt-36'>
                 {
-                    isDeleted ? <SuccesfulModal str="deleted" clicked={true} /> : <SuccesfulModal clicked={false} />
+                    // show modal for last delete
+                    modal
                 }
                 <h1 className=' text-lg font-bold'>No reviews were added!</h1>
             </div>
@@ -44,7 +60,8 @@ export default function MyReviews() {
     return (
         <div className='mt-8 px-4 md:px-20'>
             {
-                isDeleted ? <SuccesfulModal clicked={true} /> : <SuccesfulModal clicked={false} />
+                // show modal
+                modal
             }
             <div className='flex justify-center mb-16'>
                 <h2 className=' font-bold'>My Reviews</h2>

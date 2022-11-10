@@ -5,14 +5,23 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import ReviewForm from '../../shared/ReviewUtils/ReviewForm';
 import Spin from '../../shared/Spinner/Spin';
 
-export default function UpdateReviewFormModal({ clicked, closed, review }) {
+export default function UpdateReviewFormModal({ clicked, closed, review, updatedReview }) {
     const { user, loading } = useContext(AuthContext);
     const [visible, setVisible] = useState();
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, formState, submittedData, reset } = useForm();
     const { service_name, _id, reviewText, rating, displayName, createdAt, profileURL, email } = review;
     const [newRating, setNewRating] = useState();
     const [err, setErr] = useState('');
+    const [spinner, setSpinner] = useState(false);
 
+    // resetting form
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset({ reviewText: '', rating: '5' });
+        }
+    }, [formState, submittedData, reset]);
+
+    // watch on change rating
     useEffect(() => {
         setNewRating(watch('rating'));
     }, [watch('rating')])
@@ -34,8 +43,9 @@ export default function UpdateReviewFormModal({ clicked, closed, review }) {
         if (rating !== data.rating) updatedDoc.rating = data.rating;
 
         console.log(updatedDoc);
-
-        fetch(`http://localhost:5000/update/${_id}`, {
+        // set sppiner
+        setSpinner(true);
+        fetch(`http://localhost:5000/updat/${_id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -47,9 +57,26 @@ export default function UpdateReviewFormModal({ clicked, closed, review }) {
                 console.log(data);
                 if (data.result.modifiedCount > 0) {
                     console.log(data.result.modifiedCount + 'document updated')
+                    updatedReview(data.review);
+                    closed()
+                    setSpinner(false)
+                    setVisible(false)
+                }
+                else {
+                    closed()
+                    setSpinner(false)
+                    setVisible(false);
+                    updatedReview(false)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                closed()
+                setSpinner(false)
+                setVisible(false);
+                updatedReview(false)
+                console.log(err);
+            }
+            )
     }
 
     if (loading) return <Spin />
@@ -69,6 +96,9 @@ export default function UpdateReviewFormModal({ clicked, closed, review }) {
                 <Modal.Header />
                 <Modal.Body>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        {
+                            spinner && <Spin />
+                        }
                         {
                             <p className=' text-red-500 mb-2'>{err}</p>
                         }
