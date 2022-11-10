@@ -15,11 +15,11 @@ export default function MyReviewCard({ review, newData }) {
     const [spinner, setSpinner] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    console.log(rev)
     useEffect(() => {
         setRev({ ...review });
     }, [review])
 
+    // new updated review (only the updated one one)
     const handleUpdatedReview = (Review) => {
         console.log(Review)
         if (Review) {

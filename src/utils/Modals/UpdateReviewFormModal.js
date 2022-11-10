@@ -45,7 +45,7 @@ export default function UpdateReviewFormModal({ clicked, closed, review, updated
         console.log(updatedDoc);
         // set sppiner
         setSpinner(true);
-        fetch(`http://localhost:5000/updat/${_id}`, {
+        fetch(`https://service-a11-server.vercel.app/update/${_id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'

@@ -6,9 +6,17 @@ import invalid from '../../assets/invalid.png'
 
 export default function SuccesfulModal({ clicked, str, icon }) {
     const [visible, setVisible] = useState();
-    let img;
-    if (icon === 0) img = checkmark
-    else img = invalid;
+    let img, buttonColor;
+
+    // set modal icon and button color based on success failure
+    if (icon === '0') {
+        img = checkmark;
+        buttonColor = 'success';
+    }
+    else {
+        img = invalid;
+        buttonColor = 'failure';
+    }
     useEffect(() => {
         setVisible(clicked);
     }, [clicked])
@@ -33,7 +41,7 @@ export default function SuccesfulModal({ clicked, str, icon }) {
                         </h3>
                         <div className="flex justify-center gap-4">
                             <Button
-                                color="failure"
+                                color={buttonColor}
                                 onClick={() => {
                                     setVisible(false)
                                 }}

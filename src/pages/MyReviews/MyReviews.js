@@ -11,6 +11,7 @@ export default function MyReviews() {
     const [loading, setLoading] = useState(true);
     const [isDeleted, setIsDeleted] = useState('');
 
+    // set valid/invalid modal
     const modal = isDeleted === '0'
         ? <SuccesfulModal icon='0' str="deleted" clicked={true} />
         :

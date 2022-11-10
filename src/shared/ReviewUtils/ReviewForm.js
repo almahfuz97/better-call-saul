@@ -12,7 +12,7 @@ export default function ReviewForm({ service, newReviews }) {
     const { register, handleSubmit, watch, submittedData, formState, formState: { errors }, reset } = useForm();
     const [rating, setRating] = useState(5);
     const [loading, setLoading] = useState(false);
-    const [isReviewPosted, setIsReviewPosted] = useState(false);
+    const [isReviewPosted, setIsReviewPosted] = useState('');
 
     // set rating on select, using 'watch' of use form
     useEffect(() => {
@@ -61,19 +61,27 @@ export default function ReviewForm({ service, newReviews }) {
         })
             .then(res => res.json())
             .then(data => {
-                newReviews(data.reviews);
                 setLoading(false);
                 if (data.result.acknowledged) {
-                    setIsReviewPosted(true);
-                    setTimeout(() => {
-                        setIsReviewPosted(false)
-                    }, 4000);
+                    setIsReviewPosted('0');
+                    // send new data to parent myREviews
+                    newReviews(data.reviews);
                 }
+                else {
+                    newReviews(false)
+                    setIsReviewPosted('1');
+                }
+                setTimeout(() => {
+                    setIsReviewPosted('')
+                }, 4000);
 
             })
             .catch(err => {
+                newReviews(false)
                 setLoading(false)
                 console.log(err)
+                setIsReviewPosted('1');
+
             })
     }
 
@@ -86,7 +94,15 @@ export default function ReviewForm({ service, newReviews }) {
                 </div>
                 <div className='w-full relative '>
                     {
-                        isReviewPosted ? <SuccesfulModal str="added" clicked={true} /> : <SuccesfulModal clicked={false} />
+                        isReviewPosted === '0'
+                            ?
+                            <SuccesfulModal icon='0' str="added" clicked={true} />
+                            :
+                            isReviewPosted === '1'
+                                ?
+                                <SuccesfulModal icon='1' str="did not added" clicked={true} />
+                                :
+                                <SuccesfulModal clicked={false} />
                     }
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {
