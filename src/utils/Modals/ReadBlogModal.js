@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 export default function ReadBlogModal({ clicked, blog, handleClick }) {
     const [visible, setVisible] = useState();
 
+    const descArray = blog.description.split('+');
     console.log(clicked)
 
     useEffect(() => {
@@ -24,9 +25,17 @@ export default function ReadBlogModal({ clicked, blog, handleClick }) {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="space-y-6 overflow-y-scroll max-h-[300px]">
-                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            {blog.description}
-                        </p>
+                        {
+                            descArray.map((para, index) => {
+                                return (
+                                    <div key={index * 10} >
+                                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                            {para}
+                                        </p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </Modal.Body>
                 {/* <Modal.Footer>

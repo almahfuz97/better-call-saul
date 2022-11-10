@@ -33,7 +33,7 @@ export default function AddBlog() {
             photoURL: user.photoURL,
         }
 
-        fetch(`http://localhost:5000/addblog`, {
+        fetch(`https://service-a11-server.vercel.app/addblog`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
