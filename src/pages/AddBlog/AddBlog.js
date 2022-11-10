@@ -1,12 +1,15 @@
+import userEvent from '@testing-library/user-event';
 import { registerVersion } from 'firebase/app'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import addImg from '../../assets/imageUpload.png'
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Spin from '../../shared/Spinner/Spin';
 import SuccesfulModal from '../../utils/Modals/SuccesfulModal';
 
-export default function AddService() {
+export default function AddBlog() {
     const { register, handleSubmit, reset, formState, submittedData } = useForm();
+    const { user } = useContext(AuthContext);
     const [spinner, setSpinner] = useState(false);
     const [success, setSuccess] = useState('');
 
@@ -20,22 +23,22 @@ export default function AddService() {
     const onSubmit = data => {
         console.log(data);
         setSpinner(true);
-        const serviceData = {
-            service_name: data.title,
+        const blogData = {
+            title: data.title,
             description: data.description,
-            description2: null,
-            service_img: data.photoURL,
-            price: data.price,
-            rating: parseInt(data.rating),
+            blog_img: data.photoURL,
             createdAt: Date.now(),
+            createdBy: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
         }
 
-        fetch(`https://service-a11-server.vercel.app/addservice`, {
+        fetch(`http://localhost:5000/addblog`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(serviceData)
+            body: JSON.stringify(blogData)
         })
             .then(res => res.json())
             .then(data => {
@@ -59,7 +62,7 @@ export default function AddService() {
                 console.log(err)
             })
 
-        console.log(serviceData)
+        console.log(blogData)
     }
     return (
         <div className='mt-8'>
@@ -72,7 +75,7 @@ export default function AddService() {
                 {
                     success === '0'
                         ?
-                        <SuccesfulModal icon='0' str='Service added successfully!' clicked={true} />
+                        <SuccesfulModal icon='0' str='Blog added successfully!' clicked={true} />
                         :
                         success === '1'
                             ?
@@ -84,7 +87,7 @@ export default function AddService() {
             </div>
             <div>
                 <div className='font-bold text-2xl md:text-3xl flex justify-center'>
-                    <h1>Add Service</h1>
+                    <h1>Add Blog</h1>
                 </div>
                 <div className=' flex justify-center mt-1'>
                     <div className='h-1 bg-red-600 w-12 md:w-12 lg:w-12'></div>
@@ -95,13 +98,13 @@ export default function AddService() {
             <div className='flex justify-center'>
                 <div className='mt-16 w-3/4 max-w-4xl'>
                     <div>
-                        <h1 className=' font-bold text-xl'>Service Information</h1>
+                        <h1 className=' font-bold text-xl'>Blog Information</h1>
                     </div>
                     <div>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className='mt-8 '>
                                 <label className='relative' htmlFor="title">
-                                    Service Title
+                                    Blog Title
                                     <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
                                 </label> <br />
                                 <input
@@ -110,60 +113,16 @@ export default function AddService() {
                                     className="rounded-lg mt-4 w-full"
                                 />
                             </div>
-                            {/* amount and location */}
-                            <div className='flex flex-col md:flex-row md:justify-between md:gap-4'>
-                                <div className='mt-8 w-full md:w-1/2 '>
-                                    <label className='relative' htmlFor="title">
-                                        Service Amount
-                                        <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
-                                    </label> <br />
-                                    <input
-                                        type="number"
-                                        {...register('price', { required: true })}
-                                        className="rounded-lg mt-4 w-full"
-                                    />
-                                </div>
-                                <div className='mt-8 w-full md:w-1/2 '>
-                                    <label className='relative' htmlFor="title">
-                                        Service Location
-                                        <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
-                                    </label> <br />
-                                    <input
-                                        type="text"
-                                        {...register('location', { required: true })}
-                                        className="rounded-lg mt-4 w-full"
-                                    />
-                                </div>
-                            </div>
 
                             {/* details description */}
-                            <div className='mt-16'>
-                                <div>
-                                    <h1 className=' font-bold text-xl'>Details Information</h1>
-                                </div>
-                                <div className='mt-8'>
-                                    <label className='relative' htmlFor="">
-                                        Descriptions
-                                        <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
-                                    </label> <br />
-                                    <textarea {...register('description', { required: true })} className=' w-full mt-4 rounded-lg min-h-[200px]' placeholder='Description'></textarea>
-                                </div>
 
-                                <div className='mt-8'>
-                                    <label className='relative' htmlFor="title">
-                                        Ratings
-                                        <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
-                                    </label> <br />
-                                    <select {...register('rating', { required: true })} defaultValue='5' name="" id="" className=' w-full rounded-lg mt-4'>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                </div>
+                            <div className='mt-8'>
+                                <label className='relative' htmlFor="">
+                                    Descriptions
+                                    <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
+                                </label> <br />
+                                <textarea {...register('description', { required: true })} className=' w-full mt-4 rounded-lg min-h-[200px]' placeholder='Description'></textarea>
                             </div>
-
                             {/* photo */}
                             <div className='mt-16'>
                                 <div>
@@ -178,7 +137,7 @@ export default function AddService() {
                                 </div>
                                 <div className='mt-8 w-full '>
                                     <label className='relative' htmlFor="title">
-                                        Photo Url
+                                        Photo URL
                                         <sup className='ml-2 font-bold text-xl absolute text-red-600'>*</sup>
                                     </label> <br />
                                     <input

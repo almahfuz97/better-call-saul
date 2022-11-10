@@ -63,6 +63,7 @@ export default function ServicesCard({ service, review }) {
                             ${price}
                         </span>
                         {
+                            // checking if its called from serviceDetails page or others
                             review || <Link to={`/service/${_id}`}>
                                 <Button
                                     color="dark"

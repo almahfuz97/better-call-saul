@@ -35,7 +35,7 @@ export default function Header() {
                 rounded={true}
             >
                 <Navbar.Brand >
-                    <span className="self-center whitespace-nowrap text-xl font-bold dark:text-white">
+                    <span className="self-center whitespace-nowrap text-lg font-bold dark:text-white">
                         Better Call Saul
                     </span>
                 </Navbar.Brand>
@@ -57,10 +57,13 @@ export default function Header() {
                             </Dropdown.Header>
                             <Dropdown.Divider />
                             <Dropdown.Item >
-                                My Reviews
+                                <NavLink to='/myreviews'>My Reviews</NavLink>
                             </Dropdown.Item>
                             <Dropdown.Item >
-                                Add Service
+                                <NavLink to='/addservice'>Add Service</NavLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item >
+                                <NavLink to='/addblog'>Add Blog</NavLink>
                             </Dropdown.Item>
                             <Dropdown.Item onClick={() => { logOut() }}>
                                 Sign out
@@ -78,6 +81,12 @@ export default function Header() {
                         className={({ isActive }) => isActive ? " text-red-500" : ''}
                     >
                         Home
+                    </NavLink>
+                    <NavLink
+                        to='/blog'
+                        className={({ isActive }) => isActive ? " text-red-500" : ''}
+                    >
+                        Blog
                     </NavLink>
                     <NavLink
                         to='/services'
@@ -118,6 +127,7 @@ export default function Header() {
                                 </NavLink>
                             </>
                     }
+
                 </Navbar.Collapse>
             </Navbar >
         </div >
