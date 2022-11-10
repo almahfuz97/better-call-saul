@@ -7,8 +7,6 @@ import pfp from '../../assets/profile.svg'
 export default function Header() {
     const { user, logOut } = useContext(AuthContext);
 
-    console.log(user?.displayName)
-
     const handleLogOut = () => {
         logOut()
             .then(() => localStorage.removeItem('service-token'))

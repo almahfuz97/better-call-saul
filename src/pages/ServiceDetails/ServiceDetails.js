@@ -18,7 +18,6 @@ export default function ServiceDetails() {
     const [showReviews, setShowReviews] = useState();
 
     const { _id, service_name } = service;
-    console.log(reviews);
     const location = useLocation();
 
     // set reviews 
@@ -27,7 +26,6 @@ export default function ServiceDetails() {
     }, [])
 
     const newReviews = (data) => {
-        console.log(data)
         setShowReviews(data);
     }
     return (

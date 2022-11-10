@@ -18,12 +18,10 @@ export default function Register() {
 
 
     const onSubmit = data => {
-        console.log(data)
         setSpinner(true);
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 setSpinner(false)
 
                 const userInfo = {

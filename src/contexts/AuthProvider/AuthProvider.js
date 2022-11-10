@@ -32,8 +32,6 @@ export default function AuthProvider({ children }) {
         return (
             updateProfile(auth.currentUser, userInfo)
                 .then((res) => {
-                    console.log('profile updated successfully');
-                    console.log(user);
                     setLoading(false)
                 })
                 .catch(err => {

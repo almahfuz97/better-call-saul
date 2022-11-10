@@ -14,7 +14,7 @@ export default function MyReviewCard({ review, newData }) {
         setPopup(false)
         if (proceed) {
             setSpinner(true);
-            fetch(`http://localhost:5000/delete/${_id}?email=${email}`, {
+            fetch(`https://service-a11-server.vercel.app/delete/${_id}?email=${email}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())

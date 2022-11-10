@@ -14,8 +14,6 @@ export default function ReviewForm({ service, newReviews }) {
     const [loading, setLoading] = useState(false);
     const [isReviewPosted, setIsReviewPosted] = useState(false);
 
-    console.log(isReviewPosted)
-
     // set rating on select, using 'watch' of use form
     useEffect(() => {
         setRating(watch('rating'))
@@ -41,7 +39,6 @@ export default function ReviewForm({ service, newReviews }) {
     // onSubmit
     const onSubmit = data => {
         setLoading(true);
-        console.log(data);
         setRating(data.rating);
 
         const reviewData = {
@@ -54,7 +51,6 @@ export default function ReviewForm({ service, newReviews }) {
             service_name
 
         }
-        console.log(reviewData)
 
         fetch(`https://service-a11-server.vercel.app/review/service/${_id}`, {
             method: "POST",
@@ -65,8 +61,6 @@ export default function ReviewForm({ service, newReviews }) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data.result);
-                console.log(data.reviews);
                 newReviews(data.reviews);
                 setLoading(false);
                 if (data.result.acknowledged) {

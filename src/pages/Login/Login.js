@@ -18,13 +18,11 @@ export default function Login() {
 
     // login with email pass
     const onSubmit = data => {
-        console.log(data);
         setSpinner(true)
         signIn(data.email, data.password)
             .then(result => {
                 const u = result.user;
                 const userEmail = u.email;
-                console.log(u);
                 setErr('')
                 setSpinner(false)
             })
@@ -43,7 +41,6 @@ export default function Login() {
                 const userEmail = {
                     email: user.email,
                 }
-                console.log(user.photoURL)
             })
             .catch(err => console.log(err))
     }

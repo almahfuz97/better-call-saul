@@ -24,8 +24,6 @@ export default function MyReviews() {
         fetch(`https://service-a11-server.vercel.app/myreviews?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                console.log(user?.email)
                 setMyReviews(data);
                 if (user?.email) setLoading(false)
             })
