@@ -1,6 +1,6 @@
 # Better Call Saul
 
-An Service provider website for a person where you'll find various services related to immigration law.
+A Service provider website for a person where you'll find various services related to immigration law.
 
 Live Link of website: [https://service-a11.web.app/](https://service-a11.web.app/) (click to visit!)
 
