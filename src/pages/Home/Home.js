@@ -64,7 +64,7 @@ export default function Home() {
                 <Testimonials />
             </div>
 
-            <div className='mt-20 px-4 md:px-20'>
+            <div className='mt-24 px-4 md:px-20'>
                 <div className=' flex justify-center'>
                     <h1 className=' font-bold text-xl'>Top notch client support</h1>
                 </div>

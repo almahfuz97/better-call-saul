@@ -13,20 +13,19 @@ export default function AuthProvider({ children }) {
 
     // provider sign in
     const providerSignIn = (provider) => {
-        setLoading(true);
+        // setLoading(true);
         return signInWithPopup(auth, provider);
     }
 
     // create user with email and pass
     const createUser = (email, password) => {
-        setLoading(true);
+        // setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     // sign in with email and password
     const signIn = (email, password) => {
-        setLoading(true);
-
+        // setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 

@@ -13,7 +13,7 @@ export default function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { user, providerSignIn, signIn, loading, setLoading } = useContext(AuthContext);
     const location = useLocation();
-    const from = location?.state?.from || '/home';
+    const from = '/home';
     const navigate = useNavigate();
     const [err, setErr] = useState('');
     const [spinner, setSpinner] = useState(false);
@@ -86,7 +86,7 @@ export default function Login() {
     return (
         <div className='flex justify-center mt-12 mx-4'>
 
-            <div className='border p-8 rounded-lg md:w-96'>
+            <div className='border p-8 rounded-lg shadow-lg md:w-96'>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4  ">
                     <div>
                         {
@@ -120,7 +120,9 @@ export default function Login() {
                             name="password"
                             type="password"
                             {...register('password', { required: true })}
+                            placeholder="Your Password"
                         />
+
                     </div>
 
                     <Button type="submit" className='mt-4'>

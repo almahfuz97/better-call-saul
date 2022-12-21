@@ -15,6 +15,7 @@ export default function Register() {
     const location = useLocation();
     const from = location?.state?.from2 || '/home';
     const navigate = useNavigate();
+    const [err, setErr] = useState('');
     const [spinner, setSpinner] = useState(false);
 
     // set title
@@ -36,6 +37,7 @@ export default function Register() {
             })
             .catch(err => {
                 setSpinner(false)
+                setErr(err);
                 console.log(err)
             })
 
@@ -52,8 +54,9 @@ export default function Register() {
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full  ">
 
                     <h1 className=' text-center font-bold mb-4 text-xl'>Register</h1>
-
+                    <p className=' text-red-500'>{err.message}</p>
                     <div>
+
                         <div className="mb-2 block">
                             <Label
                                 htmlFor="fullName"

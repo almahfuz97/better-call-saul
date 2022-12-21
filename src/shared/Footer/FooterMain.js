@@ -5,7 +5,7 @@ import logo from '../../assets/logo192.png'
 
 export default function FooterMain() {
     return (
-        <Footer container={true} bgDark={true} className='mt-20  rounded-none'>
+        <Footer container={true} bgDark={true} className='mt-20  border-t-4 rounded-none'>
             <div className="w-full">
                 <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
                     <div className='flex mb-4'>
