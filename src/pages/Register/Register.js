@@ -50,7 +50,7 @@ export default function Register() {
             {
                 spinner && <div className='absolute top-1/2 z-10'><Spin /></div>
             }
-            <div className='border p-8 rounded-lg md:w-96'>
+            <div className='border p-8 rounded-lg shadow-lg md:w-96'>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full  ">
 
                     <h1 className=' text-center font-bold mb-4 text-xl'>Register</h1>
@@ -69,7 +69,11 @@ export default function Register() {
                             placeholder='Full Name'
                             {...register('fullName', { required: true })}
                         />
+                        {
+                            errors?.fullName && <p className=' text-red-500 text-xs '>This field is required</p>
+                        }
                     </div>
+
                     <div>
                         <div className="mb-2 block">
                             <Label
@@ -84,6 +88,9 @@ export default function Register() {
                             {...register('email', { required: true })}
 
                         />
+                        {
+                            errors?.email && <p className=' text-red-500 text-xs '>This field is required</p>
+                        }
                     </div>
                     <div>
                         <div className="mb-2 block">
@@ -99,6 +106,9 @@ export default function Register() {
                             {...register('url', { required: true })}
 
                         />
+                        {
+                            errors?.url && <p className=' text-red-500 text-xs '>This field is required</p>
+                        }
                     </div>
                     <div>
                         <div className="mb-2 block">
@@ -110,10 +120,13 @@ export default function Register() {
                         <TextInput
                             name="password"
                             type="password"
-
+                            placeholder='set password'
                             {...register('password', { required: true })}
 
                         />
+                        {
+                            errors?.password && <p className=' text-red-500 text-xs '>This field is required</p>
+                        }
                     </div>
 
                     <Button type="submit">

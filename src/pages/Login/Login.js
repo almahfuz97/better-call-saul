@@ -88,6 +88,7 @@ export default function Login() {
 
             <div className='border p-8 rounded-lg shadow-lg md:w-96'>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4  ">
+                    <h3 className=' text-center uppercase font-bold'>Login</h3>
                     <div>
                         {
                             spinner && <Spin />
