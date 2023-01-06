@@ -16,6 +16,7 @@ export default function Numbers() {
                     <CountUp
                         end={90}
                         duration={2}
+                        enableScrollSpy={true}
                     />
                 </h2>                <h2 className=' tracking-widest text-xl font-bold'>Awards & Citation</h2>
             </div>
@@ -26,6 +27,7 @@ export default function Numbers() {
                     <CountUp
                         end={2940}
                         duration={2}
+                        enableScrollSpy={true}
                     />
                 </h2>
                 <h2 className=' tracking-widest text-xl font-bold'>Cases Won</h2>
@@ -37,6 +39,8 @@ export default function Numbers() {
                     <CountUp
                         end={2500}
                         duration={2}
+                        enableScrollSpy={true}
+
                     />
                     +
                 </h2>

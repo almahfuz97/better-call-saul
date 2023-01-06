@@ -1,10 +1,12 @@
 import { Card, Dropdown } from 'flowbite-react'
 import React from 'react'
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 export default function TestimonialsCard({ tes }) {
     return (
         <div>
-            <Card>
+            <div>
                 {/* <div className="flex justify-end px-4 pt-4">
                     <Dropdown
                         inline={true}
@@ -37,24 +39,29 @@ export default function TestimonialsCard({ tes }) {
                     </Dropdown>
                 </div> */}
                 <div className="flex flex-col items-center pb-10">
+
+
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+
+                    </span>
+                    <div className=' flex justify-center space-x-6'>
+                        <FaQuoteLeft></FaQuoteLeft>
+                        <p className=' text-center w-2/3 mb-6 text-slate-500'>
+                            {tes.testimony}
+                        </p>
+                        <FaQuoteRight></FaQuoteRight>
+                    </div>
+
                     <img
-                        className="mb-3 h-24 w-24 rounded-full shadow-lg"
+                        className="mb-3 h-20 w-20 rounded-full shadow-lg"
                         src={tes.photoUrl}
                         alt="Bonnie image"
                     />
                     <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                         {tes.name}
                     </h5>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-
-                    </span>
-                    <div>
-                        <p>
-                            {tes.testimony}
-                        </p>
-                    </div>
                 </div>
-            </Card>
+            </div>
         </div>
     )
 }
