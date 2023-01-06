@@ -8,6 +8,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import Spin from '../../shared/Spinner/Spin';
 import useTitle from '../../hooks/useTitle';
 import Testimonials from './Testimonials/Testimonials';
+import Numbers from './Numbers/Numbers';
 
 export default function Home() {
     const [services, setServices] = useState();
@@ -55,6 +56,8 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
+
+            <Numbers />
 
             <div className='mt-20 px-4 md:px-20'>
                 <div className='flex justify-center mb-8'>
