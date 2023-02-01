@@ -11,6 +11,8 @@ import Testimonials from './Testimonials/Testimonials';
 import Numbers from './Numbers/Numbers';
 import Promise from './Promise/Promise';
 import FAQ from './FAQ/FAQ';
+import AboutUs from './AboutUs/AboutUs';
+import RecentBlog from './RecentBlog/RecentBlog';
 
 export default function Home() {
     const [services, setServices] = useState();
@@ -68,6 +70,8 @@ export default function Home() {
                 </div>
                 <Testimonials />
             </div>
+            <RecentBlog />
+            <AboutUs />
             <FAQ />
             <Promise></Promise>
 
