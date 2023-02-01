@@ -9,6 +9,8 @@ import Spin from '../../shared/Spinner/Spin';
 import useTitle from '../../hooks/useTitle';
 import Testimonials from './Testimonials/Testimonials';
 import Numbers from './Numbers/Numbers';
+import Promise from './Promise/Promise';
+import FAQ from './FAQ/FAQ';
 
 export default function Home() {
     const [services, setServices] = useState();
@@ -59,17 +61,19 @@ export default function Home() {
 
             <Numbers />
 
-            <div className='mt-20 px-4 md:px-20'>
+            <div className='my-20 px-4 md:px-20'>
                 <div className='flex justify-center mb-8'>
-                    <h1 className=' font-bold text-3xl'>Testimonials</h1>
+                    <h1 className=' text-2xl font-semibold sm:text-4xl text-center'>What Our Clients Say About Our Services</h1>
 
                 </div>
                 <Testimonials />
             </div>
+            <FAQ />
+            <Promise></Promise>
 
             <div className='mt-24 px-4 md:px-20 space-y-4 bg-slate-50 py-20'>
                 <div className=' flex justify-center'>
-                    <h1 className=' font-bold text-xl tracking-wider'>Top notch client support</h1>
+                    <h1 className=' font-bold text-2xl tracking-wider'>Top notch client support</h1>
                 </div>
                 <div className=' flex justify-center'>
                     <p className='text-center w-4/5 to-center opacity-50 px-12'>Help Desk with one on one email and ticket support and dedicated support staff ready to assist you. Response times usually less than 8 hours.</p>
