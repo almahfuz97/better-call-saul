@@ -35,6 +35,7 @@ export default function BlogCard({ blog }) {
                     </h5>
                 </Tooltip>
 
+                        {/* testing */}
                 <h5 className="text-md max-h-[50px] md:hidden font-semibold tracking-tight text-gray-900 dark:text-white">
                     {title}
                 </h5>

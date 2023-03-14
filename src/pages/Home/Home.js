@@ -79,7 +79,7 @@ export default function Home() {
                     <h1 className=' font-bold text-2xl tracking-wider'>Top notch client support</h1>
                 </div>
                 <div className=' flex justify-center'>
-                    <p className='text-center w-4/5 to-center opacity-50 px-12'>Help Desk with one on one email and ticket support and dedicated support staff ready to assist you. Response times usually less than 8 hours.</p>
+                    <p className='text-center md:w-4/5  opacity-50 md:px-12'>Help Desk with one on one email and ticket support and dedicated support staff ready to assist you. Response times usually less than 8 hours.</p>
                 </div>
                 <div className='flex gap-4 justify-center mt-4'>
                     <button className='border border-purple-500 hover:text-purple-500 px-8 py-4 rounded shadow drop-shadow-lg font-bold'>
